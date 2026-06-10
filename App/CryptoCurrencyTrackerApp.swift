@@ -2,16 +2,17 @@
 //  CryptoCurrencyTrackerApp.swift
 //  CryptoCurrencyTracker
 //
-//  Created by Kuluru, Muralidhar on 26.05.26.
+//  Created by Sharvani, Karrepu on 26.05.26.
 //
 
 import SwiftUI
-
+import SwiftData
 @main
 struct CryptoCurrencyTrackerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainTabView()
         }
+        .modelContainer(for: FavoriteCoin.self)
     }
 }
