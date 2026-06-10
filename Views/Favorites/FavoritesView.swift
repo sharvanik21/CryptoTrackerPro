@@ -15,7 +15,7 @@ struct FavoritesView: View {
     private var favorites: [FavoriteCoin]
     
     @State private var viewModel = FavoritesViewModel()
-  
+    
     var body: some View {
         NavigationStack {
             contentView
@@ -36,21 +36,21 @@ struct FavoritesView: View {
                 }
         }
     }
-
+    
     @ViewBuilder
     private var contentView: some View {
         if favorites.isEmpty {
             EmptyFavoritesView()
-        } else if viewModel.isLoading && viewModel.enrichedFavorites.isEmpty {
+        } else if viewModel.isLoading && viewModel.favoriteCoins.isEmpty {
             loadingView
         } else if let error = viewModel.errorMessage,
-                  viewModel.enrichedFavorites.isEmpty {
+                  viewModel.favoriteCoins.isEmpty {
             errorView(message: error)
         } else {
             favoritesList
         }
     }
-
+    
     private var loadingView: some View {
         VStack(spacing: 12) {
             ProgressView()
@@ -60,7 +60,7 @@ struct FavoritesView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-  
+    
     private func errorView(message: String) -> some View {
         VStack(spacing: 16) {
             Image(systemName: "exclamationmark.triangle.fill")
@@ -86,12 +86,12 @@ struct FavoritesView: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-   
+    
     private var favoritesList: some View {
         List {
-            ForEach(viewModel.enrichedFavorites) { enriched in
-                NavigationLink(value: enriched.coin) {
-                    FavoriteRow(enriched: enriched)
+            ForEach(viewModel.favoriteCoins) { favorite in
+                NavigationLink(value: favorite.coin) {
+                    FavoriteRow(favorite: favorite)
                 }
             }
             .onDelete(perform: deleteFavorites)
@@ -114,7 +114,7 @@ struct FavoritesView: View {
     
     private func deleteFavorites(at offsets: IndexSet) {
         for index in offsets {
-            let favorite = viewModel.enrichedFavorites[index]
+            let favorite = viewModel.favoriteCoins[index]
             if let favoriteToDelete = favorites.first(where: { $0.id == favorite.id }) {
                 modelContext.delete(favoriteToDelete)
             }

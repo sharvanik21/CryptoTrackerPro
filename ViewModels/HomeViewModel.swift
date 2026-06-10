@@ -7,7 +7,6 @@
 
 import Foundation
 
-// HomeViewModel handles live updates with simple loop
 @Observable
 @MainActor
 final class HomeViewModel {

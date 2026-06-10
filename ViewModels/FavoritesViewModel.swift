@@ -12,16 +12,19 @@ import Observation
 @MainActor
 final class FavoritesViewModel {
     
-    private(set) var enrichedFavorites: [EnrichedFavorite] = []
+    private(set) var favoriteCoins: [FavoriteCoinDetails] = []
     private(set) var isLoading = false
-    private(set) var lastUpdated: Date?
     var errorMessage: String?
     
     private let coinService: CoinServiceProtocol
-    private var liveUpdateTask: Task<Void, Never>?
     
-    private enum Constants {
-        static let liveUpdateInterval: Duration = .seconds(30)
+    var favoritesCountText: String {
+        let count = favoriteCoins.count
+        return "\(count) \(count == 1 ? "coin" : "coins")"
+    }
+    
+    var hasFavorites: Bool {
+        !favoriteCoins.isEmpty
     }
     
     init() {
@@ -32,12 +35,10 @@ final class FavoritesViewModel {
         self.coinService = coinService
     }
     
-    // MARK: - Data Loading
-    
     /// Fetches fresh market data and merges it with saved favorites.
     func loadFavorites(_ favorites: [FavoriteCoin]) async {
         guard !favorites.isEmpty else {
-            enrichedFavorites = []
+            favoriteCoins = []
             return
         }
         
@@ -46,8 +47,7 @@ final class FavoritesViewModel {
         
         do {
             let allCoins = try await coinService.fetchCoins()
-            enrichedFavorites = mergeData(favorites: favorites, with: allCoins)
-            lastUpdated = Date()
+            favoriteCoins = mergeData(favorites: favorites, with: allCoins)
             errorMessage = nil
         } catch {
             errorMessage = error.localizedDescription
@@ -58,41 +58,12 @@ final class FavoritesViewModel {
     private func mergeData(
         favorites: [FavoriteCoin],
         with coins: [Coin]
-    ) -> [EnrichedFavorite] {
+    ) -> [FavoriteCoinDetails] {
         favorites.compactMap { favorite in
             guard let matchingCoin = coins.first(where: { $0.id == favorite.id }) else {
                 return nil
             }
-            return EnrichedFavorite(favorite: favorite, coin: matchingCoin)
+            return FavoriteCoinDetails(favorite: favorite, coin: matchingCoin)
         }
-    }
-    
-    // MARK: - Live Updates
-    
-    func startLiveUpdates(for favorites: [FavoriteCoin]) {
-        liveUpdateTask?.cancel()
-        liveUpdateTask = Task {
-            while !Task.isCancelled {
-                try? await Task.sleep(for: Constants.liveUpdateInterval)
-                guard !Task.isCancelled else { break }
-                await loadFavorites(favorites)
-            }
-        }
-    }
-    
-    func stopLiveUpdates() {
-        liveUpdateTask?.cancel()
-        liveUpdateTask = nil
-    }
-    
-    // MARK: - Computed Properties
-    
-    var favoritesCountText: String {
-        let count = enrichedFavorites.count
-        return "\(count) \(count == 1 ? "coin" : "coins")"
-    }
-    
-    var hasFavorites: Bool {
-        !enrichedFavorites.isEmpty
     }
 }

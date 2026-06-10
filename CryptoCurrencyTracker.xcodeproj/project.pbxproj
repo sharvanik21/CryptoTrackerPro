@@ -24,7 +24,7 @@
 		0768C2712FCC7B810056688B /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768C2702FCC7B810056688B /* FavoritesView.swift */; };
 		0768C2732FCC87480056688B /* FavoriteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768C2722FCC87480056688B /* FavoriteRow.swift */; };
 		0768C2762FCCAF1D0056688B /* PriceChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768C2752FCCAF1D0056688B /* PriceChartViewModel.swift */; };
-		28E455662FD8568800C184A0 /* EnrichedFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E455652FD8568800C184A0 /* EnrichedFavorite.swift */; };
+		28E455662FD8568800C184A0 /* FavoriteCoinDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E455652FD8568800C184A0 /* FavoriteCoinDetails.swift */; };
 		28E455682FD856A700C184A0 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E455672FD856A700C184A0 /* FavoritesViewModel.swift */; };
 		28E4556A2FD85A6D00C184A0 /* EmptyFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E455692FD85A6D00C184A0 /* EmptyFavoritesView.swift */; };
 		28E4556E2FD998A100C184A0 /* FavoriteRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E4556D2FD998A100C184A0 /* FavoriteRowViewModel.swift */; };
@@ -69,7 +69,7 @@
 		0768C2702FCC7B810056688B /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		0768C2722FCC87480056688B /* FavoriteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRow.swift; sourceTree = "<group>"; };
 		0768C2752FCCAF1D0056688B /* PriceChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceChartViewModel.swift; sourceTree = "<group>"; };
-		28E455652FD8568800C184A0 /* EnrichedFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrichedFavorite.swift; sourceTree = "<group>"; };
+		28E455652FD8568800C184A0 /* FavoriteCoinDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCoinDetails.swift; sourceTree = "<group>"; };
 		28E455672FD856A700C184A0 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		28E455692FD85A6D00C184A0 /* EmptyFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFavoritesView.swift; sourceTree = "<group>"; };
 		28E4556D2FD998A100C184A0 /* FavoriteRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRowViewModel.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				0768C24B2FC617620056688B /* Coin.swift */,
-				28E455652FD8568800C184A0 /* EnrichedFavorite.swift */,
+				28E455652FD8568800C184A0 /* FavoriteCoinDetails.swift */,
 				0768C26C2FCC7A3C0056688B /* FavoriteCoin.swift */,
 			);
 			path = Models;
@@ -397,7 +397,7 @@
 				28E4556A2FD85A6D00C184A0 /* EmptyFavoritesView.swift in Sources */,
 				28E4556E2FD998A100C184A0 /* FavoriteRowViewModel.swift in Sources */,
 				0768C2602FCADAB20056688B /* CoinDetailView.swift in Sources */,
-				28E455662FD8568800C184A0 /* EnrichedFavorite.swift in Sources */,
+				28E455662FD8568800C184A0 /* FavoriteCoinDetails.swift in Sources */,
 				28E455682FD856A700C184A0 /* FavoritesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

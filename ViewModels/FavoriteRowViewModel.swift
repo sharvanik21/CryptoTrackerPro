@@ -9,22 +9,22 @@ import SwiftUI
 
 struct FavoriteRowViewModel {
     
-    let enriched: EnrichedFavorite
+    let favorite: FavoriteCoinDetails
     
     var name: String {
-        enriched.coin.name
+        favorite.coin.name
     }
     
     var symbol: String {
-        enriched.coin.symbol.uppercased()
+        favorite.coin.symbol.uppercased()
     }
     
     var imageURL: URL? {
-        URL(string: enriched.coin.image)
+        URL(string: favorite.coin.image)
     }
     
     var sparklinePrices: [Double] {
-        enriched.coin.sparklineIn7d?.price ?? []
+        favorite.coin.sparklineIn7d?.price ?? []
     }
     
     var hasSparklineData: Bool {
@@ -32,7 +32,7 @@ struct FavoriteRowViewModel {
     }
 
     private var priceChangePercentage: Double {
-        enriched.coin.priceChangePercentage24h ?? 0
+        favorite.coin.priceChangePercentage24h ?? 0
     }
     
     var isPriceUp: Bool {
@@ -44,8 +44,8 @@ struct FavoriteRowViewModel {
     }
     
     var formattedPrice: String {
-        priceFormatter.string(from: NSNumber(value: enriched.coin.currentPrice))
-            ?? "$\(enriched.coin.currentPrice)"
+        priceFormatter.string(from: NSNumber(value: favorite.coin.currentPrice))
+            ?? "$\(favorite.coin.currentPrice)"
     }
     
     var formattedPercentChange: String {
@@ -63,7 +63,7 @@ struct FavoriteRowViewModel {
         formatter.currencyCode = "USD"
         formatter.locale = Locale(identifier: "en_US")
         
-        let decimalConfig = decimalPlaces(for: enriched.coin.currentPrice)
+        let decimalConfig = decimalPlaces(for: favorite.coin.currentPrice)
         formatter.minimumFractionDigits = decimalConfig.minimum
         formatter.maximumFractionDigits = decimalConfig.maximum
         

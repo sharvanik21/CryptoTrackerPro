@@ -22,8 +22,8 @@ struct FavoriteRow: View {
         static let priceChangeIconSize: CGFloat = 8
     }
     
-    init(enriched: EnrichedFavorite) {
-        self.viewModel = FavoriteRowViewModel(enriched: enriched)
+    init(favorite: FavoriteCoinDetails) {
+        self.viewModel = FavoriteRowViewModel(favorite: favorite)
     }
 
     var body: some View {
