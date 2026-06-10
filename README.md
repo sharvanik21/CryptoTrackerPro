@@ -74,90 +74,121 @@ The app integrates with the [CoinGecko API](https://www.coingecko.com/en/api), a
 
 No API key is required, making the app easy to run out of the box.
 
+
 ## 🚀 Getting Started
 
 Follow these steps to run the app on your machine:
 
-1. Clone the repository:
+### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/sharvanik21/CryptoTrackerPro.git
-2. Navigate to the project folder:
+```
+
+### 2. Navigate to the Project Folder
+
+```bash
 cd CryptoTrackerPro
-3. Open the project in Xcode:
+```
+
+### 3. Open the Project in Xcode
+
+```bash
 open CryptoCurrencyTracker.xcodeproj
-4.Select an iOS Simulator (iPhone 15 Pro recommended)
-5.Press Cmd + R to build and run the app
+```
+
+### 4. Run the App
+
+- Select an iOS Simulator (iPhone 15 Pro recommended)
+- Press **⌘ + R** to build and run the app
+
+---
 
 ## ✅ Requirements
-- iOS 17+
-- Xcode 15+
+
+- iOS 17.0+
+- Xcode 15.0+
 - Swift 5.9+
--macOS 14.0 or later
+- macOS 14.0+
+
+---
 
 ## 📂 Project Structure
 
-CryptoTrackerPro/
-├── App/
+```text
+CryptoTrackerPro
+├── App
 │   └── CryptoCurrencyTrackerApp.swift
-├── Models/
+├── Models
 │   ├── Coin.swift
 │   ├── FavoriteCoin.swift
 │   └── FavoriteCoinDetails.swift
-├── Services/
+├── Services
 │   ├── NetworkService.swift
 │   └── CoinService.swift
-├── ViewModels/
+├── ViewModels
 │   ├── HomeViewModel.swift
 │   ├── DetailViewModel.swift
 │   ├── FavoritesViewModel.swift
 │   ├── FavoriteRowViewModel.swift
 │   └── PriceChartViewModel.swift
-└── Views/
+└── Views
     ├── MainTabView.swift
-    ├── Home/
+    ├── Home
     │   ├── HomeView.swift
     │   └── CoinRowView.swift
-    ├── Detail/
+    ├── Detail
     │   └── CoinDetailView.swift
-    ├── Favorites/
+    ├── Favorites
     │   ├── FavoritesView.swift
     │   ├── FavoriteRow.swift
     │   └── EmptyFavoritesView.swift
-    └── Components/
+    └── Components
         ├── PriceChartView.swift
         ├── StatCard.swift
         └── ErrorView.swift
-        
+```
+
+---
+
 ## 🎯 Technical Challenges & Solutions
 
 ### Challenge 1: Generating Clean Y-Axis Labels Across Different Price Ranges
+
 **Problem:** Default chart labels showed random values like `$73,142`, `$74,389` for Bitcoin and duplicate values like `$1`, `$1`, `$1` for low-priced coins like XRP.
 
-**Solution:** Implemented Heckberts "Nice Numbers" algorithm (Graphics Gems, 1990) to generate human-readable Y-axis values that always round to clean intervals (1, 2, 5, 10 multipliers). The same logic now produces `$73K, $74K, $75K` for Bitcoin and `$1.28, $1.30, $1.32` for XRP.
+**Solution:** Implemented Heckbert's "Nice Numbers" algorithm (Graphics Gems, 1990) to generate human-readable Y-axis values that always round to clean intervals (1, 2, 5, 10 multipliers). The same logic now produces `$73K`, `$74K`, `$75K` for Bitcoin and `$1.28`, `$1.30`, `$1.32` for XRP.
 
 ---
 
 ### Challenge 2: Chart Looked Broken for Stablecoins
+
 **Problem:** Coins like USDC, USDT, and BUIDL have nearly identical prices ($1.00), which made the chart look broken with a flat line and washed-out gradient.
 
-**Solution:** Designed a `ChartState` enum (`normal`, `stable`, `noData`, `insufficientData`) and created a dedicated UI for stablecoins showing a centered dashed line with a "Stable Price" badge. The detection uses a 0.1% variation threshold to identify essentially-flat prices.
+**Solution:** Designed a `ChartState` enum (`normal`, `stable`, `noData`, `insufficientData`) and created a dedicated UI for stablecoins showing a centered dashed line with a "Stable Price" badge.
 
 ---
 
 ### Challenge 3: Merging Persistent and Live Data
-**Problem:** Favorites stored in SwiftData only contained basic info (id, symbol, name) and didnt have live prices. Needed a way to combine SwiftData entities with fresh API data.
 
-**Solution:** Created an `FavoriteCoinDetails` model that combines a `FavoriteCoin` (from SwiftData) with a matching `Coin` (from API). The `FavoritesViewModel` performs the merge operation, allowing the UI to display saved coins with live market data.
+**Problem:** Favorites stored in SwiftData only contained basic info (id, symbol, name) and didn't have live prices.
+
+**Solution:** Created a `FavoriteCoinDetails` model that combines a `FavoriteCoin` (from SwiftData) with a matching `Coin` (from API). The `FavoritesViewModel` performs the merge operation, allowing the UI to display saved coins with live market data.
 
 ---
 
 ### Challenge 4: Price Formatting for Wildly Different Magnitudes
-**Problem:** A single formatter couldnt handle prices ranging from Bitcoin ($73,456) to Shiba Inu ($0.00002345) readably.
 
-**Solution:** Built an adaptive formatting strategy using switch statements on price magnitude, dynamically setting `minimumFractionDigits` and `maximumFractionDigits` on `NumberFormatter`. Result: Bitcoin shows as `$73,456.00`, while SHIB shows as `$0.00002345`.
+**Problem:** A single formatter couldn't handle prices ranging from Bitcoin ($73,456) to Shiba Inu ($0.00002345) readably.
 
+**Solution:** Built an adaptive formatting strategy using switch statements on price magnitude, dynamically setting `minimumFractionDigits` and `maximumFractionDigits` on `NumberFormatter`.
+
+---
 
 ## 👨‍💻 Author
-💼 LinkedIn: linkedin.com/in/sharvanikarrepu
-🐙 GitHub: @sharvanik21
-📧 Email: sharvanikarrepu@gmail.com
+
+**Sharvani Karrepu**
+
+- LinkedIn: https://linkedin.com/in/sharvanikarrepu
+- GitHub: https://github.com/sharvanik21
+- Email: sharvanikarrepu@gmail.com
