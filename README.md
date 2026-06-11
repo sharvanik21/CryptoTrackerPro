@@ -185,6 +185,19 @@ CryptoTrackerPro
 
 ---
 
+## 🔮 Future Enhancements
+
+- Add price alerts with local notifications for favorite coins.
+
+- Add portfolio tracking with holdings, average buy price, and profit/loss.
+
+- Support multiple currencies such as EUR, INR, and GBP.
+
+- Add advanced chart ranges including 30D, 3M, and 1Y.
+
+- Add widget support for quick favorite coin price updates.
+
+---
 ## 👨‍💻 Author
 
 **Sharvani Karrepu**
